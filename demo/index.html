@@ -13,6 +13,29 @@
         <a href="https://github.com/turinggroup/angular-validator">https://github.com/turinggroup/angular-validator</a>
         <hr>
         <form angular-validator-submit="submitMyForm()" name="myForm" class="form-horizontal" novalidate angular-validator>
+            
+            <h4>Validation for dynamic fields</h4>
+            <p><em>Fields produced from a ng-repeat loop</em></p>
+
+            <div ng-repeat="field in fields">
+                <div class="form-group">
+                <label class="col-sm-2 control-label">On {{field.validateOn}} validation</label>
+                <div class="col-sm-10">
+                    <label>{{field.label}}</label>
+                    <input  type = "text"
+                        name = "dirty"
+                        validate-on="{{field.validateOn}}"
+                        class = "form-control"
+                        ng-model = "form.dirty"
+                        validator = "field.validateFunc"
+                        invalid-message="field.invalidMsg"
+                        required-message="'Yo! This field is required..'"
+                        required>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
             <h4>Choose when to validate:</h4>
             <div class="form-group">
                 <label class="col-sm-2 control-label">On dirty validation</label>
@@ -188,7 +211,7 @@
         <p>Form submitted: {{myForm.submitted}}</p>
 
     </div>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>    <script src="app.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
     <script src="app.js"></script>
     <script src="../dist/angular-validator.js"></script>
 </body>
